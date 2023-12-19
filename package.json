@@ -1,0 +1,12 @@
+{
+  "name": "letterboxdlistbyrating",
+  "version": "1.0.0",
+  "description": "Simple tool to filter films watched into films watched with a certain rating",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
