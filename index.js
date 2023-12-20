@@ -45,10 +45,10 @@ function sortByRating(ratingsArray){
 function writeListFromRatingsArray(ratingsArray,listTitle){
 
     let allLines = [];
-    allLines.push("Position,Title,Year,URL,Description")
+    allLines.push("Title,Year,URL,Description")
 
     for ( let i = 0 ; i < ratingsArray.length ; i++ ){
-        let betterLine = `${i+1},${ratingsArray[i][1]},${ratingsArray[i][2]},${ratingsArray[i][3]},,`
+        let betterLine = `"${ratingsArray[i][1]}",${ratingsArray[i][2]},${ratingsArray[i][3]},`
         allLines.push(betterLine)
     }
 
