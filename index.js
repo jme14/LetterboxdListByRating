@@ -1,5 +1,6 @@
 const { parse } = require("csv-parse")
 const fs = require("fs")
+const prompt = require("prompt-sync")();
 
 function readWatchedFile(fileLocation){
 
@@ -64,15 +65,36 @@ function writeListFromRatingsArray(ratingsArray,listTitle){
 // input: array of strings, filtered
 // output: success or failure in writing list file 
 
+function getNumber(promptMessage, lowestAllowed, highestAllowed){
+
+    let number = Number(prompt(promptMessage))
+
+    if (isNaN(number)){
+        number = getNumber("Not a number, try again", lowestAllowed, highestAllowed)
+    }
+    if ( number < lowestAllowed ){
+        number = getNumber("That number is too low, try again", lowestAllowed, highestAllowed)
+    } 
+    if ( number > highestAllowed){
+        number = getNumber("That number is too high, try again", lowestAllowed, highestAllowed)
+    }
+
+    return number
+}
 
 function main(){
+
+    const lowerBound = getNumber("What is the lowest rating allowed in this list?",0,5)
+    const higherBound = getNumber("What is the highest rating allowed in this list?", lowerBound, 5)
+    const title = prompt("What do you want your list to be called?\t")
+
     readWatchedFile("./ratings.csv")
     .then((result) => {
-        result = filterByRating(result, 4, 5)
+        result = filterByRating(result, lowerBound, higherBound)
         result = sortByRating(result)
         console.log(result.length)
 
-        writeListFromRatingsArray(result,"Top100-700")
+        writeListFromRatingsArray(result,title)
     }).catch((error) => console.log(error))
 
 }
