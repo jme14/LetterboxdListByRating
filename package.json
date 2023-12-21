@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ratingsFilter": "node operations/ratingsFilter.js"
+    "ratingsFilter": "node operations/ratingsFilter.js",
+    "yearEndListMaker": "node operations/yearEndListMaker.js"
   },
   "author": "",
   "license": "ISC",

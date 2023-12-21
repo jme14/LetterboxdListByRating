@@ -2,7 +2,8 @@ const { parse } = require("csv-parse")
 const fs = require("fs")
 const prompt = require("prompt-sync")();
 
-const readRatings = require("../utilities/reading/readRatingsFile")
+const readRatings = require("../utilities/readLetterboxdFile")
+const getNumber = require("../utilities/betterPrompt")
 
 /* 
 input: export from letterboxd transfered to array 
@@ -43,23 +44,6 @@ function writeListFromRatingsArray(ratingsArray,listTitle){
 // WRITE A LIST FILE  
 // input: array of strings, filtered
 // output: success or failure in writing list file 
-
-function getNumber(promptMessage, lowestAllowed, highestAllowed){
-
-    let number = Number(prompt(promptMessage))
-
-    if (isNaN(number)){
-        number = getNumber("Not a number, try again", lowestAllowed, highestAllowed)
-    }
-    if ( number < lowestAllowed ){
-        number = getNumber("That number is too low, try again", lowestAllowed, highestAllowed)
-    } 
-    if ( number > highestAllowed){
-        number = getNumber("That number is too high, try again", lowestAllowed, highestAllowed)
-    }
-
-    return number
-}
 
 function main(){
 
