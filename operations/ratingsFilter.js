@@ -2,29 +2,12 @@ const { parse } = require("csv-parse")
 const fs = require("fs")
 const prompt = require("prompt-sync")();
 
-function readWatchedFile(fileLocation){
+const readRatings = require("../utilities/reading/readRatingsFile")
 
-    return new Promise( (resolve, reject) => {
-        let watchedData = [];
-
-        fs.createReadStream(fileLocation)
-        .pipe(parse({delimiter: ",", from_line: 2}))
-        .on("data", (row) => {
-            watchedData.push(row)
-        })
-        .on("end", () => {
-            resolve(watchedData)
-        })
-        .on("error", (error) => reject(error))
-
-    })
-
-}
-// READ THE WATCHED FILE 
-// input: file location 
-// output: an array of strings corresponding to each line of the file 
-
-
+/* 
+input: export from letterboxd transfered to array 
+output: all entries between (inc) low and upper bound stay, else removed 
+*/
 function filterByRating(ratingsArray, lowerBound, upperBound){
 
     function isInRange(record){
@@ -32,11 +15,7 @@ function filterByRating(ratingsArray, lowerBound, upperBound){
     }
     return ratingsArray.filter(isInRange)
 }
-// FILTER THE ARRAY THROUGH RATING 
-// input: an array of strings corresponding to the "watched" section 
-// input: the lower rating end 
-// input: the higher rating end 
-// output: an array of strings only  
+
 
 function sortByRating(ratingsArray){
     return ratingsArray.sort((a,b) => b[4]-a[4])
@@ -52,7 +31,7 @@ function writeListFromRatingsArray(ratingsArray,listTitle){
         allLines.push(betterLine)
     }
 
-    let stream = fs.createWriteStream(`${listTitle}.csv`,)
+    let stream = fs.createWriteStream(`./newLists/${listTitle}.csv`,)
 
     allLines.forEach((element)=>{
         stream.write(element+"\n")
@@ -88,7 +67,7 @@ function main(){
     const higherBound = getNumber("What is the highest rating allowed in this list?", lowerBound, 5)
     const title = prompt("What do you want your list to be called?\t")
 
-    readWatchedFile("./ratings.csv")
+    readRatings("./ratings.csv")
     .then((result) => {
         result = filterByRating(result, lowerBound, higherBound)
         result = sortByRating(result)
