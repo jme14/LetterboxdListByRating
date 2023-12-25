@@ -3,7 +3,8 @@ const fs = require("fs")
 const prompt = require("prompt-sync")();
 
 const readDiary = require("../utilities/readLetterboxdFile")
-const getNumber = require("../utilities/betterPrompt")
+const { getNumber } = require("../utilities/betterPrompt")
+
 
 /* 
 input: export from letterboxd transfered to array 

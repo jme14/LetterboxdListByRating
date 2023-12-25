@@ -17,4 +17,18 @@ function getNumber(promptMessage, lowestAllowed, highestAllowed){
     return number
 }
 
-module.exports = getNumber
+function getYesOrNo(promptMessage){
+    let answer = prompt(promptMessage)
+
+    if ( answer !== "n" && answer !== "y" && answer !== "b" && answer !== "quit"){
+        answer = getYesOrNo("Enter y for yes or n for no")
+    }
+
+    if ( answer === "quit"){
+        throw new Error("STOP THE PROGRAM!!!")
+    }
+
+    return answer 
+}
+
+module.exports = { getNumber, getYesOrNo }

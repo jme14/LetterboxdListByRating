@@ -3,7 +3,9 @@ const fs = require("fs")
 const prompt = require("prompt-sync")();
 
 const readRatings = require("../utilities/readLetterboxdFile")
-const getNumber = require("../utilities/betterPrompt")
+const { getNumber, getYesOrNo } = require("../utilities/betterPrompt")
+
+const easyRank = require("../utilities/easyRank")
 
 /* 
 input: export from letterboxd transfered to array 
@@ -56,6 +58,12 @@ function main(){
         result = filterByRating(result, lowerBound, higherBound)
         result = sortByRating(result)
         console.log(result.length)
+
+        let answer = getYesOrNo("Do you want to sort this list? y for yes, n for no")
+        if ( answer === "y"){
+            result = easyRank(result)
+        }
+
 
         writeListFromRatingsArray(result,title)
     }).catch((error) => console.log(error))
