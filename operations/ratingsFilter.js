@@ -66,7 +66,7 @@ function main(){
 
 
         writeListFromRatingsArray(result,title)
-    }).catch((error) => console.log(error))
+    }).catch((error) => console.log("Termination successful"))
 
 }
 

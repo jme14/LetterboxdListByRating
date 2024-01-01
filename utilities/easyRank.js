@@ -20,6 +20,17 @@ function partition(ratingsArray, low, high){
 
     let pivot = ratingsArray[high]
 
+    /* include loop to ask user if partition is a good choice only when the difference between low and high is significant */ 
+    if ( high-low > 10 ){
+        let pivotApproval = getYesOrNo(`Is ${pivot[1]} (${pivot[2]}) a good pivot?`)
+        for ( let i = 1 ; pivotApproval === "n" && high-i > low; i++){
+            swap(ratingsArray, high, high-i)
+            pivot = ratingsArray[high]
+            pivotApproval = getYesOrNo(`Is ${pivot[1]} (${pivot[2]}) a good pivot?`)
+        }
+    } 
+    
+
     let index1 = low-1 
     let index2 = low 
 
