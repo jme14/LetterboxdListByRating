@@ -82,8 +82,8 @@ function randomize(ratingsArray){
 
 function quickSort(ratingsArray){
 
-    //let randomized = randomize(ratingsArray)
-    let randomized = ratingsArray
+    let randomized = randomize(ratingsArray)
+    //let randomized = ratingsArray
 
     return (recursiveQuickSort(randomized, 0, ratingsArray.length-1))
 }
