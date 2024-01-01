@@ -101,9 +101,9 @@ function quickSort(ratingsArray){
 
 function recursiveQuickSort(ratingsArray, low, high){
 
-    console.log(ratingsArray)
-    console.log(low)
-    console.log(high)
+    //console.log(ratingsArray)
+    //console.log(low)
+    //console.log(high)
 
     if ( low < high){
 

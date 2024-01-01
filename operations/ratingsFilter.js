@@ -57,7 +57,7 @@ function main(){
     .then((result) => {
         result = filterByRating(result, lowerBound, higherBound)
         result = sortByRating(result)
-        console.log(result.length)
+        console.log(`There are ${result.length} films in this list`)
 
         let answer = getYesOrNo("Do you want to sort this list? y for yes, n for no")
         if ( answer === "y"){
