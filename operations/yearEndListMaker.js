@@ -3,9 +3,9 @@ const fs = require("fs")
 const prompt = require("prompt-sync")();
 
 const readDiary = require("../utilities/readLetterboxdFile")
-const { getNumber } = require("../utilities/betterPrompt")
+const { getNumber, getYesOrNo } = require("../utilities/betterPrompt")
 
-
+const easyRank = require("../utilities/easyRank")
 /* 
 input: export from letterboxd transfered to array 
 output: all entries not watched in given year are removed  
@@ -66,8 +66,13 @@ function main(){
 
         console.log(result.length)
 
+        rankingAnswer = getYesOrNo("Do you wish to rank this list? y for yes, n for no")
+        if ( rankingAnswer === "y"){
+            result = easyRank(result)
+        }
+
         writeListFromRatingsArray(result,title)
-    }).catch((error) => console.log(error))
+    }).catch((error) => console.log("Termination successful"))
 
 }
 
