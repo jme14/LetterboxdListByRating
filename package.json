@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ratingsFilter": "node operations/ratingsFilter.js",
-    "yearEndListMaker": "node operations/yearEndListMaker.js"
+    "yearEndListMaker": "node operations/yearEndListMaker.js",
+    "compareLists": "node operations/listCompare.js"
   },
   "author": "",
   "license": "ISC",
